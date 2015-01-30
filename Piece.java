@@ -28,15 +28,11 @@ class Piece{
 
       /**
       *Constructor for Piece object.
-      *@param int column that piece is in
-      *@param int row that piece is in 
       *@param int colour that piece is
       *@since 1.0
       */
-      public Piece(int colour, int row, int column){
+      public Piece(int colour){
       	     this.colour = colour;
-	     rowPosition = row;
-	     columnPosition = column;
 	     sides = new Side[NUM_SIDES];
       }
 }
