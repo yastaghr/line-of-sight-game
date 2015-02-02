@@ -38,12 +38,12 @@ abstract Piece{
       
       /**
        * Will take an incoming laser and determine what its interaction with the Piece is (eg. reflection, kill, etc).
-       * Action is an enum.
-       * @param Direction direction of incoming line
+       * Action is an enum, as is Direction.
+       * @param Direction direction of origin for incoming line
        * @return Action action performed by laser
        * @since 1.0
        */
-      abstract public Action interact(Direction incoming);
+      abstract public Affect interact(Direction incoming);
       
       /**
        * Rotates Piece 90deg with specified rotation.
