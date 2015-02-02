@@ -9,8 +9,6 @@ abstract Piece{
       //sides always arranged up, down, left, right
       protected Side[] sides;
       private static final int NUM_SIDES = 4;
-    
-      private boolean isDead;
       
       private int colour;
       /**
@@ -25,6 +23,7 @@ abstract Piece{
       public static final int WHITE = 1;
 
       private int rowPosition, columnPosition;
+      private Direction facing;
 
       /**
       *Constructor for Piece object.
