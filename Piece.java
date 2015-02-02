@@ -5,7 +5,7 @@
 *@author Liana Bardallis
 *@version 1.0
 */
-class Piece{
+abstract Piece{
       //sides always arranged up, down, left, right
       protected Side[] sides;
       private static final int NUM_SIDES = 4;
@@ -35,4 +35,19 @@ class Piece{
       	     this.colour = colour;
 	     sides = new Side[NUM_SIDES];
       }
+      
+      /**
+       * Will take an incoming laser and determine what its interaction with the Piece is (eg. reflection, kill, etc).
+       * Action is an enum.
+       * @param Direction direction of incoming line
+       * @return Action action performed by laser
+       * @since 1.0
+       */
+      abstract public Action interact(Direction incoming);
+      
+      /**
+       * Rotates Piece 90deg with specified rotation.
+       * @since 1.0
+       */
+      abstract public void rotate(boolean clockwise);
 }
