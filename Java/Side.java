@@ -1,0 +1,3 @@
+enum Side{
+     BLOCK, REFLECTIVE, VULNERABLE, SPLIT;
+}
