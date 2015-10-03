@@ -5,24 +5,41 @@ function Piece(type, xCoord, yCoord, direction) {
     this.yCoord = yCoord;
     this.direction = direction;
     this.image = getImage(this.type);
-};
+}
+function Emmiter(xCoord, yCoord, direction){
+  Piece.apply(this, arguements);
+  this.type = 'emitter';
+  this.xCoord = xCoord;
+  this.yCoord = yCoord;
+  this.direction = direction;
+  this.image = getImage(this.type);
+}
 
 getImage = function(type){
   var filename;
   //determines which image to use
   switch (type){
     case 'emitter':
-      filename = 'emitter.png'
+      filename = 'emitter.png';
+      break;
+    case 'angle':
+      filename = 'angle.png';
       break;
     default:
-      filename = 'image.png'
+      filename = 'angle.png';
   }
   return filename;
 };
 
+//big variables
 var numRows = 6;
 var numColumns = 10;
 var squareSize = 10;
+var p1hasWon;
+var p2hasWon;
+
+//piece objects
+var emmiter1 = new Piece(Emmiter, 0, 0, 'S');
 
  drawBoard = function(){
   //draws a blank board onto screen
@@ -76,16 +93,23 @@ askMove = function(player){
   var trial = true;
   var piece, newX, newY, newDirection;
   while (trial){
+    var clickedPiece =
     //asks if last trial is final move
-    trial = !confirm('Is that your final move, player ' +(player+1)+'?');
+    trial = !confirm(('Is that your final move, player ' +(player+1)+'?'));
   }
   movePiece(piece, newX, newY, newDirection);
 };
 
-mouseClick = function(xMouse, yMouse){
-  //resets given variables to newest click location
-  xMouse = mouseX;
-  yMouse = mouseY;
+findClickedPiece = function(){
+  var x = mouseX;
+  var y = mouseY;
+  if (x<=squareSize && y<=squareSize){
+    return emmiter1;
+  }
+  else if (x>=(squareSize*(numColumns-1)) && y>=(squareSize*(numRows-1))){
+    return emmiter2;
+  }
+  //check if any of other pieces
 };
 
 movePiece = function(piece, newX, newY, newDirection){
@@ -94,6 +118,7 @@ movePiece = function(piece, newX, newY, newDirection){
 
 checkSightLine = function(side){
   //checks the line of sight from that player's light caster
+  return true; //return if has hit enemy
 };
 
 playGame = function(){
@@ -101,12 +126,26 @@ playGame = function(){
   drawBoard();
   var arrangement = prompt('Which arrangement do you want to play with? \n type \'s\' for Simple, \'a\' for advanced, and \'i\' for insane.');
   drawPieces(arrangement);
-  var p1hasWon = false, p2hasWon = false;
+  p1hasWon = false;
+  p2hasWon = false;
   var turn = 0;
+  var player;
   while (!p1hasWon && !p2hasWon){
-    askMove(turn%2);
+    player = turn%2 +1;
+    askMove(player);
     turn++;
+    //exit of loop check
+    checkForVictory();
   }
+  if (confirm("Player "+(player)+" has won! Do you want a rematch?")) playGame();
 };
 
-askMove('Liana');
+checkForVictory = function(){
+  //checks if either player has won
+  if (checkSightLine(1)){
+    p1hasWon = true;
+  }
+  if (checkSightLine(2)){
+    p2hasWon = true;
+  }
+};
