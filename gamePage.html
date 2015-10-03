@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p>Click the button to begin the game.</p>
+
+<button onclick="askMove()">Let's Begin!</button>
+
+<p id="demo"></p>
+
+<script>
+askMove = function(playerName){
+  //asks player what move they want to make
+  var trial = true;
+  while (trial){
+    console.log('...');
+
+    //asks if last trial is final move
+    trial = !confirm('Is that your final move,' +playerName+'?');
+  }
+};
+</script>
+
+</body>
+</html>
